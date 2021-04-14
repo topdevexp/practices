@@ -80,6 +80,12 @@ command_checkstyle() {
   ./gradlew checkstyleMain
 }
 
+# Command Usage: ktlint
+# Command Description: kotlin lint
+command_ktlint() {
+  ./gradlew ktlintCheck
+}
+
 check_msg() {
   printf "\xE2\x9C\x94 ${1}\n"
 }
@@ -106,7 +112,7 @@ main() {
         option_prod
         ;;
 
-      run|test|clean|build|pmd|checkstyle)
+      run|test|clean|build|pmd|checkstyle|ktlint)
         set_command "${1}"
         ;;
 
@@ -125,8 +131,9 @@ main() {
     test) command_test;;
     clean) command_clean;;
     build) command_build;;
-    pmd) command_build;;
-    checkstyle) command_build;;
+    pmd) command_pmd;;
+    checkstyle) command_checkstyle;;
+    ktlint) command_ktlint;;
 
     *) option_help; exit 1;;
   esac
