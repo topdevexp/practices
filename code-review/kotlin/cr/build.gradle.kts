@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("jvm") version "1.4.31"
 	kotlin("plugin.spring") version "1.4.31"
+	id("io.gitlab.arturbosch.detekt").version("1.17.0")
 }
 
 group = "top.devexp"
@@ -17,6 +18,20 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.jlleitschuh.gradle:ktlint-gradle:10.0.0")
+	}
+}
+
+detekt {
+	buildUponDefaultConfig = true
+	allRules = false
+	config = files("$projectDir/practice/detekt/detekt.yml")
+	baseline = file("$projectDir/practice/detekt/baseline.xml") // a way of suppressing issues before introducing detekt
+
+	reports {
+		html.enabled = true
+		xml.enabled = false
+		txt.enabled = false
+		sarif.enabled = false
 	}
 }
 

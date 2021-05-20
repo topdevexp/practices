@@ -86,6 +86,12 @@ command_ktlint() {
   ./gradlew ktlintCheck
 }
 
+# Command Usage: detekt
+# Command Description: detekt
+command_detekt() {
+  ./gradlew detekt
+}
+
 check_msg() {
   printf "\xE2\x9C\x94 ${1}\n"
 }
@@ -112,7 +118,7 @@ main() {
         option_prod
         ;;
 
-      run|test|clean|build|pmd|checkstyle|ktlint)
+      run|test|clean|build|pmd|checkstyle|ktlint|detekt)
         set_command "${1}"
         ;;
 
@@ -134,6 +140,7 @@ main() {
     pmd) command_pmd;;
     checkstyle) command_checkstyle;;
     ktlint) command_ktlint;;
+    detekt) command_detekt;;
 
     *) option_help; exit 1;;
   esac
